@@ -1,5 +1,6 @@
 package com.wei.mqtt.server.server;
 
+import com.wei.mqtt.server.handler.MQTTServerHandler;
 import com.wei.mqtt.server.handler.SocketHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -13,6 +14,7 @@ import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 
 
@@ -42,7 +44,9 @@ public class MqttServer {
                     //添加编解码
                     channel.pipeline().addLast("decoder", new MqttDecoder());
                     channel.pipeline().addLast("encoder", MqttEncoder.INSTANCE);
-                    channel.pipeline().addLast("socketHandler", new SocketHandler());
+                    channel.pipeline().addLast(new IdleStateHandler(0, 0,
+                            60));
+                    channel.pipeline().addLast("socketHandler", new MQTTServerHandler());
                 }
             });
             //标识当服务器请求处理线程全满时，用于临时存放已完成三次握手的请求的队列的最大长度
