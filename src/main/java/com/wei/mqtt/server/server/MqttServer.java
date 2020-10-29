@@ -1,7 +1,6 @@
 package com.wei.mqtt.server.server;
 
 import com.wei.mqtt.server.handler.MQTTServerHandler;
-import com.wei.mqtt.server.handler.SocketHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,17 +11,20 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.util.CharsetUtil;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class MqttServer {
 
     //端口号
+    @Value("${mqtt.port}")
     private int port;
 
+    public MqttServer() {
+    }
     public MqttServer(int port) {
         this.port = port;
     }
