@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClientManager {
 
     private static ClientManager instance = new ClientManager();
-    private ClientManager(){}
+    private ClientManager() {}
     public static ClientManager getInstance(){
         return instance;
     }
@@ -15,17 +15,17 @@ public class ClientManager {
     private Map<String, Channel> channelMap = new ConcurrentHashMap<>();
 
     //添加信道
-    public void putChannel(String ip, Channel channel){
+    public void putChannel(String ip, Channel channel) {
         this.channelMap.put(ip, channel);
     }
 
     //删除信道
-    public void removeChannel(String ip){
+    public void removeChannel(String ip) {
         this.channelMap.remove(ip);
     }
 
     //发送消息
-    public void sendMsg(String ip, String msg){
+    public void sendMsg(String ip, String msg) {
         Channel channel = this.channelMap.get(ip);
         if(channel != null){
             channel.writeAndFlush(msg);
@@ -33,7 +33,7 @@ public class ClientManager {
     }
 
     //处理消息
-    public void handleMsg(String ip, String msg){
+    public void handleMsg(String ip, String msg) {
         this.sendMsg(ip, msg);
     }
 }

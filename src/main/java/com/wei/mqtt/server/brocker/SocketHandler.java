@@ -1,4 +1,4 @@
-package com.wei.mqtt.server.handler;
+package com.wei.mqtt.server.brocker;
 
 import com.wei.mqtt.server.client.ClientManager;
 import io.netty.channel.ChannelHandlerContext;

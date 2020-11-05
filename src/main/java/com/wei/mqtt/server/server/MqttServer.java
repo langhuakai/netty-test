@@ -1,6 +1,6 @@
 package com.wei.mqtt.server.server;
 
-import com.wei.mqtt.server.handler.MQTTServerHandler;
+import com.wei.mqtt.server.brocker.MQTTServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
